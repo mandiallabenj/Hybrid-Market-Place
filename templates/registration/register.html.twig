@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+   
+        <header class=" navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <a class="navbar-brand" href="#"> <img class="p-1 shadow-sm" src="{{asset('assets/images/logo/logo.png')}}" alt="HMP" width="55" height="55"> </a>
+        
+    </header>
+<div class="container-fluid">
+ <div class="d-flex d-inline justify-content-center  align-items-center mt-1 mr-1 mb-3 flex-row">
+            <div class="p-2 bd-highlight"> <a href="" class="lead text-dark">Why Hybrid Market Place?</a></div>
+             
+             <div class="p-2 dropdown">
+                    <a class="lead text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Projects
+                    </a>
+                    <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Support</a>
+                        <a class="dropdown-item" href="#">Get Promo Code</a>
+
+                    </div>
+                </div>
+            <div class="p-2 bd-highlight"><a href="" class="lead text-dark">Our Blog</a></div>
+        </div>
+      <div class="mt-1 text-center">
+        
+        <h2>SIGN UP FORM</h2>
+        <p class="lead">
+            
+            A Hybrid Market Place for Web Applications
+            
+        </p>
+      </div>
+    
+      <div class="row">
+          <div class="col-md-3">
+          </div>
+
+          <div class="col-md-6">
+          
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.username) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+
+        <button class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+          </div>
+    <div class="col-md-3">
+          </div>
+      </div>
+     <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">C2019 HYBRID MARKET PLACE</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> Account 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
+                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href=""> Help </a>
+                        <a class="dropdown-item" href=""> Settings </a>
+                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contributors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('forum')}}"> Forum </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+
+        <div class="row mt-3">
+
+            <div class="col-md-4">
+                <div class="alert alert-light shadow">
+                    <form>
+                        <div class="form-group">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control lead" id="" placeholder="Ask a Question?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Additional Information</label>
+                            <textarea class="lead form-control" id="" rows="3" placeholder=" ... text here"></textarea>
+                        </div>
+
+                        <button class="btn btn-md btn-danger my-2 my-sm-0 shadow" type="submit">Ask A Question <i class="fa fa-question-circle"></i></button>
+                    </form>
+                </div>
+
+                <h4 class="text-secondary my-2"> Related Questions</h4>
+                <div class="list-group mt-3 shadow">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none; ">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Why Symfony 4.3?</h6>   
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Best Doctrine Version</h6>
+                        </div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 text-info">Why Symfony Bundles?</h6>
+                        </div>
+                    </a>
+
+                </div>
+            </div>            
+            <div class="col-md-8">
+                <h4 class="my-2"> Forum ~</h4>      
+
+
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Why and When should i choose Symfony 4.3"</h5>
+
+                        <div class="d-flex w-100 justify-content-between">
+                            <h8 class="my-1 mb-1 text-muted">By Mandialla Benj</h8>
+                            <small>3 days ago</small>
+                        </div>
+
+                        <p class="card-text">Im constrcuting a web application for a health sysmtem that requires contnious integration. 
+                            which framework should i use for this project?
+                        </p>
+                        <a href="#" class="card-link">Reply</a>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+{% endblock %}

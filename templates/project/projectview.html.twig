@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Appstore{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> Account 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
+                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">My Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href=""> Help </a>
+                        <a class="dropdown-item" href=""> Settings </a>
+                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News Feed </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('home')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contributors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Forum </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Blog </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search ..." aria-label="Search">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"> Search </button>
+            </form>
+            <span class="p-3 navbar-text">
+                <a class="text-primary" href=""><i class="fa fa-facebook"></i></a>
+            </span>
+            <span class="p-3 navbar-text">
+                <a class="text-info" href=""><i class="fa fa-twitter"></i></a>
+            </span>
+
+            <span class="p-3 navbar-text">
+                <a class="text-danger" href=""><i class="fa fa-youtube"></i></a>
+            </span>
+        </div>
+    </nav>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="p-2 lead">
+                        <div class="text-center">
+                            <img class="mr-3 my-5 " src="{{asset('assets/images/icon/h1.jpg') }}" style="width:64px;height: 64px" alt="Generic placeholder image">
+                        </div>
+                        <div class="mt-2"  style="font-size:14px;" >
+                            <p class="mt-2 text-center"><i class="text-success fa fa-check-circle"></i> Verified by Hybrid Market Place</p>
+                            <p class="my-2">Hybrid Market Place confirms that this app meets the <a href="#">requirements for verification.</a></p>
+                            <code class="my-2 text-dark"> Supported Languages</code>
+                            <p class="my-2"> 
+                                PHP, Symfony Framework
+                            </p>
+                            <code class="my-2 text-dark"> Author </code><a href="#">Mandiallbenj</a>
+                             <div class="d-flex mt-3 flex-column" style="font-size:13px;">
+                                 <h6> Developer Links</h6>
+                                 <div class="">
+                                     <a href="#"> Support </a>                                     
+                                 </div>
+                                 <div class="">
+                                     <a href="#"> Status </a>                                     
+                                 </div>
+                                 <div class="">
+                                     <a href="#"> Documentation </a>                                     
+                                 </div>
+                                 <div class="">
+                                     <a href="#"> Terms of service and Privacy Policy </a>                                     
+                                 </div>
+                             </div>
+                        </div>
+
+                    </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="alert-light my-5">
+                    
+                  
+                        <small> Application/Mobile</small>
+
+                        <h1 class="mt-1">APP STORE</h1>
+                        
+                        <p class="lead mt-1"  style="font-size:13px;">
+                            
+                            A Symfony Project 4.2 with Doctrine 2.2, Install this app and get your project prebuilt, 
+                            so you don't have to wait for your build downloading the internet when starting a workspace. ?
+                        
+                        </p>
+                       
+                        <p class="my-2 lead" style="font-size:14px;"><code class="text-danger"> important !</code> <a href="/docs/4.3/">Read our Documentation</a> if need be, too.</p>
+                   
+                        <a href="#" class="btn btn-success"> <i class="fa fa-download"></i> Download</a>
+                </div>
+
+
+                <ul class="nav justify-content-center lead">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="home" aria-selected="true">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="support-tab" data-toggle="tab" href="#support" role="tab" aria-controls="support" aria-selected="true">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="screenshots-tab" data-toggle="tab" href="#screenshots" role="tab" aria-controls="screenshots" aria-selected="true">screenshots</a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab"> Overview</div>
+                    <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="support-tab"> Support</div>
+                    <div class="tab-pane fade" id="screenshots" role="tabpanel" aria-labelledby="screenshots-tab"> Screenshots</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+{% endblock %}

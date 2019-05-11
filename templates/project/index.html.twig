@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project List{% endblock %}
+
+{% block body %}
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> Account 
+                    </a>
+                    <div style="font-size: 13px" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
+                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href=""> Help </a>
+                        <a class="dropdown-item" href=""> Settings </a>
+                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+            </ul>
+          
+
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="alert w-100 alert-light text-info" role="alert">
+                    <h4 class="alert-heading">Thanks For Your Support</h4>
+                    <p>Read this important alert message. We are going to run a bit longer so that you can
+                    <hr>
+                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                </div>
+
+            </div>
+
+            <div class="col-md-8">
+                <div class="card mty-2 shadow-sm p-2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">START A PROJECT</h5>
+                        <p class="card-text">Adding an existing project to HMP using the command line?
+                            <hr>
+                            With supporting tools and exclusive lead-in to additional content.</p>
+                        <a href="{{path('project_upload')}}" class="btn btn-outline-secondary">
+                            CREATE
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}

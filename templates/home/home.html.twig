@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hybrid Market Place{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+
+            </ul>
+            <div class="nav-item dropdown border-right border-left">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="img-circle"> 
+                    <small class="text-success">Signed in As </small>  <span class="text-secondary"> {{app.user.username | lower}} </span>
+                </a>
+                <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 13px;">
+                    <a class="text-info dropdown-item" href="#"> </a>
+                    <a class="dropdown-item " href="#">My Profile</a>
+                    <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="">Help </a>
+                    <a class="dropdown-item " href="">Settings </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="jumbotron bg-light my-5 bg-white p-1 text-center jumbotron-fluid">
+            <div class="container">
+                <p class="lead">A software Market Place to Find Tools, Components and Modules to build on and improve your workflow.
+                </p>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-md-8">
+                <div class="d-flex my-2">
+                    <div class="p-1">
+                        <h7 class="p-1"> All Projects <span style="font-weight: bolder" class="badge-pill badge-warning">
+                                {%if Total_Number_of_Projects == null%}
+                                    0
+                                {%else%}
+                                    {{Total_Number_of_Projects | number_format}}</span> 
+
+                            {%endif%}
+                        </h7>
+                    </div>
+                    <div class="ml-auto">
+                        <a href="{{'marketplace'}}" class="p-1 btn btn-sm shadow  btn-primary">SEE ALL</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div style="font-size: 13px;" class="d-flex flex-wrap mt-3">
+
+                    {%for project in project | slice(0,6)%}
+
+                        <figure class="figure p-2 col-sm-4">
+                            <div class="text-center">
+                                <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid rounded" alt="..." style="height:70px; width: 70px;">
+                            </div>
+
+                            <h6 style="font-size: 14px;" class="text-center text-primary mt-1 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a> <i class="text-success fa fa-check-circle"></i></h6>
+
+                            <figcaption class="figure-caption mt-1">
+                                {{project.description | slice(0,70)~'...'}}
+                            </figcaption>
+
+
+                        </figure>
+
+                    {%else%}
+                        <div style="border-left: 2px solid #dc3545" class="toast alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
+
+                            <div class="alert-body">
+                                No Projects Yet concerning this project 
+                            </div>
+
+                        </div>
+                    {%endfor%}                  
+                </div>
+                <hr>
+
+
+
+            </div>
+            <div class="col-md-4">
+                <h5 class="mb-1"> Updates </h5>
+                <hr>
+
+                <div>
+                    {%for issue in issue%}
+                        <div class="my-3" style="font-size: 13px">
+                            <div class="mx-2 border alert alert-light shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="alert-header my-1">
+                                    <small class="p-1"> <i class="mx-1 lead text-danger fa fa-flag"> ~ Issues </i>  </small> Reference </small>  </span> <a class="mr-auto p-1 text-dark">{{issue.project.title | upper}}   </a>
+                                    <small class="text-muted p-2">{{issue.createdAt | date_modify('+1 day') | date('m/d/y')}}</small>
+                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="alert-body">
+                                    <p> {{issue.issue | capitalize}}</p>
+                                    <small>Posted By {{issue.user.username | capitalize}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+                <hr>
+                <small> ~ Forum  </small>
+                <div class="list-group mt-1" style="font-size: 13px; overflow-y: scroll; height: 300px;">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none; ">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Why Symfony 4.3?</h6>
+                            <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1">The leading PHP framework to create websites and web applications. Built on top of the Symfony Components..</p>
+                        <small>By mandialla benj</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Best Doctrine Version</h6>
+                            <small class="text-muted">3 days ago</small>
+                        </div>
+                        <p class="mb-1">Symfony doesn't provide a component to work with the database, but it does provide tight integration with a third-party library called Doctrine.</p>
+                        <small class="text-muted">By Elos</small>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Why Symfony Bundles?</h6>
+                            <small>3 days ago</small>
+                        </div>
+                        <p class="mb-1">A set of decoupled and reusable components on which the best PHP applications are built, such as Drupal, phpBB, and eZ Publish.</p>
+                        <small>By mandialla benj</small>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+
+{% endblock %}

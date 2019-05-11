@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Market Place{% endblock %}
+
+{% block body %}
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="img-circle"> 
+                     <small class="text-success">Signed in As </small>   {{app.user.username | lower}}
+                    </a>
+                    <div class="dropdown-menu mx-1 p-1" aria-labelledby="navbarDropdown">
+                        <a class="text-info dropdown-item" href="#"> </a>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href=""> Help </a>
+                        <a class="dropdown-item" href=""> Settings </a>
+                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+            </ul>
+          
+
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="d-flex flex-row d-inline justify-content-center  align-items-center my-3 mr-1 mb-3 flex-row">
+
+            <div class="p-2">
+                <a href="" class="text-dark active"> All
+                </a>
+            </div>
+            <div class="p-2 dropdown">                
+
+                <a class="text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                </a>
+                <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Web</a>
+                    <a class="dropdown-item" href="#">Mobile</a>
+
+                </div>
+            </div>
+            <div class="p-2 dropdown">
+                <a class="text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Top Charts
+                </a>
+                <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Support</a>
+                    <a class="dropdown-item" href="#">Get Promo Code</a>
+
+                </div>
+            </div>
+
+            <div class="p-2 dropdown">
+                <a class="text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    New Releases
+                </a>
+                <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Recommended</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Insights</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nav-scroller my-3">
+            <nav style="font-size: 12px;" class="nav nav-underline justify-content-center">
+                <a class="nav-link active" href="#">Tags</a>
+                <a class="nav-link bg-light m-1 rounded" href="#">
+                    #Web<span class="badge badge-pill bg-light align-text-bottom">27</span>
+                </a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#PHP</a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#SymfonyFramework</a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#Twig</a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#Reactjs</a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#Android
+                    <span class="badge badge-pill bg-light align-text-bottom">27</span>
+                </a>
+                <a class="nav-link bg-light m-1 rounded" href="#">#Mobile</a>
+            </nav>
+        </div>
+
+        <div class="d-flex flex-row justify-content-center my-4">
+
+            <form action="{{path('marketplace_search')}}" class="form-inline w-50">
+                <div class="input-group w-100 mb-3">
+                    <input class="form-control" type="text" name="q" placeholder="Search for Applications..." aria-label="Search" aria-describedby="button-search">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary my-2 my-sm-0" id="button-search" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+
+            <div class="col">
+                <div style="font-size: 13px;" class="d-flex flex-wrap mt-3">
+
+                    {%for project in project%}
+                        <figure class="figure p-2 w-25">
+                            <div class="text-center">
+                                <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid img-circle" alt="HMP" style="height:70px; width: 70px;">
+                            </div>
+                            <h6 style="font-size: 14px;" class="text-center text-primary mt-1 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a> <i class="text-success fa fa-check-circle"></i></h6>
+
+                            <figcaption class="d-none d-sm-block figure-caption mt-1">
+                                {{project.description | slice(0,80) ~ ' ...'}}
+                            </figcaption>
+
+                            <figcaption class="font-weight-light mt-1">
+                                <small>Created: {{project.publishedAt | date("F jS \\a\\t g:ia")}}
+                                </small>
+                            </figcaption>        
+                            <figcaption class=" mt-1">
+                                <code  class="text-secondary"> Author </code> <a href="#" class="text-warning">{{project.user.username | capitalize}}</a>
+                            </figcaption>
+                            <div class="d-flex flex-row bd-highlight my-2" style="font-size:12px">                                    
+                                <div class="bd-highlight"><a href="{{path('project_toggle_collection' ,{id: project.id})}}" data-toggle="tooltip" data-placement="top" title="Add to Collections" class="text-dark fa fa-bookmark-o js-add-project-collections"></a><span class="p-1">Add to Collections</span></div>
+                            </div>
+                        </figure>
+
+                    {%else%}
+
+                        <div class="alert border-danger alert-light w-100">
+
+                            No Projects Found
+
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+{% endblock %}

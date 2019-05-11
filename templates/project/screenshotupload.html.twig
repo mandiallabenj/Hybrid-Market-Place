@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Start A Project{% endblock %}
+
+{% block body %}
+    
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i> Account 
+                    </a>
+                    <div style="font-size: 13px" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
+                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href=""> Help </a>
+                        <a class="dropdown-item" href=""> Settings </a>
+                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+            </ul>
+          
+
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row my-3">
+
+            <div class="col-md-3">
+                <div class="my-3">
+                    <div class="d-flex flex-column justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+                        <h6 class="text-primary"> {{project.title | upper}} </h6>
+
+                    </div>
+                    <p class="lead p-1">
+                        Upload Screenshots
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+
+                    </div>
+                {% endfor %}
+                <div class="alert alert-light mx-2 my-3 p-2"  style="border:1px dotted #5bc0de;">
+                    {{form_start(form)}}
+                    {{form_widget(form)}}
+                    {{form_end(form)}}
+                </div>
+
+                <div class="border-0 my-3 p-2">
+                    <div style="font-size: 13px" class="tab-pane fade show" id="file" role="tabpanel" aria-labelledby="file-tab">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+</footer>
+{% endblock %}
