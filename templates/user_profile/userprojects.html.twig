@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Market Place{% endblock %}
+{% block title %}{{(app.user.username | title)}} | Projects{% endblock %}
 
 {% block body %}
-   
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
@@ -14,39 +14,41 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> Account 
-                    </a>
-                    <div style="font-size: 13px" class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
-                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href=""> Help </a>
-                        <a class="dropdown-item" href=""> Settings </a>
-                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
-                    </div>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                    <a class="nav-link" href="{{path('marketplace')}}">Market Place </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('forum')}}"> Forum </a>
                 </li>
-                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"> Support </a>
                 </li>
-            </ul>
-          
 
+            </ul>
+            <div class="nav-item dropdown border-right border-left">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle"> 
+                    <small class="text-success mx-1">Signed in As </small>  <span class="text-white"> {{app.user.username | lower}} </span>
+                </a>
+                <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                    <a class="text-info dropdown-item" href="#"> </a>
+                    <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                    <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="">Help </a>
+                    <a class="dropdown-item " href="">Settings </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                </div>
+            </div>
         </div>
     </nav>
     <div class="container-fluid">
@@ -57,11 +59,11 @@
                     <div class="sidebar-sticky text-secondary">
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span>Hi, {{(app.user.username | title)}}</span>
-                                <a class="d-flex align-items-center text-muted" href="#">
-                                    
-                                </a>
-                            </h6>
-                                <hr>
+                            <a class="d-flex align-items-center text-muted" href="#">
+
+                            </a>
+                        </h6>
+                        <hr>
                         <ul style="font-size: 14px;" class="nav flex-column text-secondary">
                             <li class="nav-item">
                                 <a class="nav-link active text-secondary" href="#">
@@ -81,33 +83,32 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary" href="#">
-                                    <i class="fa fa-handshake-o"></i> Contributors
+                                <a class="nav-link text-secondary" href="{{path('collaborator_requests')}}">
+                                    <i class="fa fa-code-fork"></i> Requests
+                                    <span class="d-inline badge badge-warning"> New</span>
                                 </a>
                             </li>
-                             <li class="nav-item">
-                <a class="nav-link active text-secondary" href="#">
-                    <i class="fa fa-heart-o"></i>  Favorites
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="#">
-                    <i class="fa fa-bookmark-o"></i>   Collections
-                </a>
-              </li>
-                        </ul>
-                                <hr>
-                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                                <span>Transactions</span>
-                                <a class="d-flex align-items-center text-muted" href="#">
-                                    
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">
+                                    <i class="fa fa-handshake-o"></i> Collaborations
+                                    <span class="d-inline badge badge-"> 10 </span>
                                 </a>
-                            </h6>
+                            </li>
+                          
+                        </ul>
+                        <hr>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Transactions</span>
+                            <a class="d-flex align-items-center text-muted" href="#">
+
+                            </a>
+                        </h6>
                         <ul style="font-size: 14px;" class="nav flex-column text-secondary">
-                       
+
 
                             <li class="nav-item">
-                                <a class="nav-link active text-secondary" href="#">
+                                <a class="nav-link active text-secondary" href="{{path('user_purchases')}}">
                                     <i class="fa fa-credit-card"></i>  Payouts
                                 </a>
                             </li>
@@ -123,44 +124,83 @@
 
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h6 class="">My Projects</h6>
+                        <h5 class="">My Projects <span class="badge badge-warning"> {{project | length}} </span></h5>
                         <div class="btn-toolbar mb-2 mb-md-0">
-                            
+
                             <div class="btn-group mr-2">
-                                <a href="{{path('project_upload')}}" class="btn btn-sm btn-outline-secondary">Start A Project</a>
+                                <a href="{{path('project_upload')}}" class="btn btn-sm btn-primary">Start A Project</a>
                             </div>
 
                         </div>
                     </div>
 
-                       <ul style="font-size: 14px;" class="list-unstyled mt-3">
+                    <ul style="font-size: 14px;" class="list-unstyled mt-3">
 
-                     {%for project in project%}
-                        <li class="media my-3 shadow-sm p-2">
-                            <img class="mr-3 rounded" src="{{asset('uploads/project/icons/'~ project.icon) }}" style="width:45px;height: 45px" alt=" image">
-                            <div class="media-body">
-                                <h6 style="font-size: 14px;" class="text-primary mt-0 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a> <i class="text-success fa fa-check-circle"></i></h6>
+                        {%for project in project%}
+                            <li class="media my-4 shadow p-2">
+                                <img class="mr-3 rounded" src="{{asset('uploads/project/icons/'~ project.icon) }}" style="width:45px;height: 45px" alt=" image">
+                                <div class="media-body my-1">
+                                    <h6 style="font-size: 14px;" class="text-primary mt-0 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a> <i class="text-success fa fa-check-circle"></i></h6>
                                         {{project.description}}
 
-                                <div class="d-flex flex-row">
-                                    <div class="p-2 font-weight-light"><small>Uploaded On {{project.publishedAt |date_modify('+1 day') | date('m/d/y')}}</small></div>
-                                    <div class="p-2"><small><a class="text-primary" href=""><i class="fa fa-facebook"></i></a></small></div>
-                                    <div class="p-2"><small><a class="text-info" href=""><i class="fa fa-twitter"></i></a></small></div>
-                                    <div class="p-2"><small><a class="text-danger" href=""><i class="fa fa-youtube"></i></a></small></div>
-                                </div>
+                                    <div class="d-flex flex-row">
+                                        <div class="p-2 font-weight-light"><small>Uploaded On {{project.publishedAt |date_modify('+1 day') | date('m/d/y')}}</small></div>
+                                        <div class="p-2"><small><a class="text-primary" href=""><i class="fa fa-facebook"></i></a></small></div>
+                                        <div class="p-2"><small><a class="text-info" href=""><i class="fa fa-twitter"></i></a></small></div>
+                                        <div class="p-2"><small><a class="text-danger" href=""><i class="fa fa-youtube"></i></a></small></div>
+                                    </div>
 
-                                <div class="d-flex flex-row bd-highlight mt-1 mb-3" style="font-size:13px;">
-                                    
-                                    <div class="p-2 bd-highlight"><a href="#" class="text-dark"><i class="fa fa-plus-square-o"></i> follow</a></div>
-                                    <div class="p-2 bd-highlight"><a href="#" class="text-dark"><i class="fa fa-bookmark-o"></i> Add to collections</a></div>
-                                    <div class="p-2 bd-highlight"><a class="text-dark" href="#"><i class="fa fa-download"></i> Download</a></div>
+                                    <div class="d-flex flex-row light mt-1 mb-3" style="font-size:14px;">
+
+                                        <div class="bd-highlight">
+                                            <a class="nav-link text-secondary font-weight-bold" href="#">
+                                                <i style="font-size: 16px;" class="fa fa-handshake-o"></i> Collaborators 
+                                                <span class="badge badge-dark alert-success">
+                                                    {% set CollaboratorMatchCount = 0 %}
+                                                    {%for cproject in cproject%}
+                                                        {%if project.id == cproject.project.id and cproject.isAccepted == ['YES'] %}
+                                                            {% set CollaboratorMatchCount = matchCount + 1 %}
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                    {{CollaboratorMatchCount}}
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="bd-highlight">
+                                            <a class="nav-link text-secondary font-weight-bold" href="#">
+                                                <i style="font-size: 16px;" class="fa fa-code-fork"></i> Requests 
+                                                <span class="badge badge-dark alert-info">
+                                                    {% set CollaboratorRequestMatchCount = 0 %}
+                                                    {%for cproject in cproject%}
+                                                        {%if project.id == cproject.project.id %}
+                                                            {% set CollaboratorRequestMatchCount = CollaboratorRequestMatchCount + 1 %}
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                    {{CollaboratorRequestMatchCount}}
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="bd-highlight">
+                                            <a class="nav-link text-secondary font-weight-bold" href="#">
+                                                <i style="font-size: 16px;" class="fa text-secondary fa-flag"></i> Issues
+                                                <span class="badge badge-dark alert-danger">
+                                                    {% set IssuesMatchCount = 0 %}
+                                                    {%for iproject in iproject%}
+                                                        {%if project.id == iproject.project.id %}
+                                                            {% set IssuesMatchCount = IssuesMatchCount + 1 %}
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                    {{IssuesMatchCount}}
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                              
-                                
-                            </div>
-                        </li>
-                    {%endfor%}
-                </ul>
+                            </li>
+                        {%endfor%}
+                    </ul>
 
                 </main>
             </div>
@@ -169,7 +209,7 @@
 
 
     </div>
-                     <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Privacy</a></li>

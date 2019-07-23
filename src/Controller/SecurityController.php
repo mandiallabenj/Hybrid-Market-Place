@@ -1,5 +1,12 @@
 <?php
 
+
+/*
+
+security module to Verify and antheticate user
+
+*/
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

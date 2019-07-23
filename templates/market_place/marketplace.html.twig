@@ -4,7 +4,7 @@
 
 {% block body %}
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
@@ -14,21 +14,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-               <li class="nav-item dropdown ml-auto">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="img-circle"> 
-                     <small class="text-success">Signed in As </small>   {{app.user.username | lower}}
-                    </a>
-                    <div class="dropdown-menu mx-1 p-1" aria-labelledby="navbarDropdown">
-                        <a class="text-info dropdown-item" href="#"> </a>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href=""> Help </a>
-                        <a class="dropdown-item" href=""> Settings </a>
-                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
-                    </div>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('home')}}">Home</a>
                 </li>
@@ -39,13 +25,88 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('forum')}}"> Forum </a>
                 </li>
-                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"> Support </a>
                 </li>
-            </ul>
-          
 
+            </ul>
+            {%if is_granted ('ROLE_USER')  %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <i class="fa fa-code-fork text-white mx-1"></i>
+                            Collaborator Requests
+                            <span class="py-1 mx-1 badge-pill badge-danger" style="font-weight: bold;   font-size: .70em">10</span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <div class="list-group mt-1" style="font-size: 13px;">
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none; ">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Voice Recognition App</h6>
+
+                                    </div>
+                                    <p class="mb-1">Built on top of the Symfony Components ..</p>
+                                    <small>Request From mandialla benj</small>
+                                    <br>
+                                    <small>3 days ago</small>
+
+
+                                </a>
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none;">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Love Match</h6>
+                                    </div>
+                                    <p class="mb-1">Symfony doesn't provide a component to work with the database ...</p>
+                                    <small class="text-muted">Request From Elos</small>
+                                    <br>
+                                    <small>3 days ago</small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown mx-2 border-right border-left">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle">
+                            <small class="text-success mx-1">Signed in As
+                            </small>
+                            <span class="text-secondary">
+                                {{app.user.username | lower}}
+                            </span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <a class="text-info dropdown-item" href="#"></a>
+                            <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                            <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item " href="">Help
+                            </a>
+                            <a class="dropdown-item " href="">Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+                {%else%}
+
+                <span class="p-1">
+                    <a href="{{path('app_login')}} " class=" btn btn-info text-uppercase" href="">
+                        SIGN IN
+                    </a>
+                </span>
+                <span class="p-1">
+                    <a href="{{path('app_register')}} " class=" btn btn-outline-warning text-uppercase" href="">
+                        SIGN UP
+                    </a>
+                </span>
+
+
+                {%endif%}
         </div>
     </nav>
 
@@ -131,7 +192,9 @@
                             <div class="text-center">
                                 <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid img-circle" alt="HMP" style="height:70px; width: 70px;">
                             </div>
-                            <h6 style="font-size: 14px;" class="text-center text-primary mt-1 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a> <i class="text-success fa fa-check-circle"></i></h6>
+                            <h6 style="font-size: 14px;" class="text-center text-primary mt-1 mb-1"><a href="{{path('marketplace_show_project', {id: project.id})}}"> {{project.title | capitalize}}</a>
+                                {%if project.isApproved == 'YES'%} <i class="text-success fa fa-check-circle"></i>{%endif%}
+                            </h6>
 
                             <figcaption class="d-none d-sm-block figure-caption mt-1">
                                 {{project.description | slice(0,80) ~ ' ...'}}

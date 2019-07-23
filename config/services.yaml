@@ -8,6 +8,8 @@ parameters:
     project_icon_directory: '%kernel.project_dir%/public/uploads/project/icons'
     project_file_directory: '%kernel.project_dir%/public/uploads/project/projectfile'
     project_screenshot_directory: '%kernel.project_dir%/public/uploads/project/projectscreenshots'
+    stripe_secret_key: sk_test_lwKKfshWlvfUYjNrVqsg7hN600eNrKwL6I
+    stripe_public_key: pk_test_ERpFregIJhhyBzMzVhkHoTZH00ZoL3pr3D
 
 services:
     # default configuration for services in *this* file

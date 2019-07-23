@@ -35,6 +35,16 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     
+      public function findNumberOfUsers() {
+        
+        return $this->createQueryBuilder('u')
+                ->select('COUNT(u.id) as Total_Number_of_Users')
+                ->getQuery()
+                ->getSingleScalarResult()
+                ;
+        
+    }
+    
 
     /*
     public function findOneBySomeField($value): ?User

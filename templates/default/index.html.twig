@@ -1,122 +1,156 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hybrid Market Place{% endblock %}
+{% block title %}Hybrid Market Place
+{% endblock %}
 
+{# Landing page #}
 {% block body %}
 
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
- 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
         <a class="navbar-brand" href="#">
-    <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-       
-      <li class="nav-item">
-        <a class="nav-link" href="#">Why Hybrid Market Place? <span class="sr-only">(current)</span> </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-     
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-    </ul>
-      
-    <span class="p-3 navbar-text">
-        <a class="text-primary" href=""><i class="fa fa-facebook"></i></a>
-    </span>
-      <span class="p-3 navbar-text">
-        <a class="text-info" href=""><i class="fa fa-twitter"></i></a>
-    </span>
-      
-       <span class="p-3 navbar-text">
-        <a class="text-danger" href=""><i class="fa fa-youtube"></i></a>
-    </span>
-  </div>
-</nav>
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarText" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
 
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Why Hybrid Market Place?
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
 
+            <span class="p-1">
+                <a href="{{path('app_login')}} " class=" btn btn-info text-uppercase" href="">
+                    SIGN IN
+                </a>
+            </span>
+            <span class="p-1">
+                <a href="{{path('app_register')}} " class=" btn btn-outline-warning text-uppercase" href="">
+                    SIGN UP
+                </a>
+            </span>
+
+        </div>
+    </nav>
 
     <div class="container-fluid">
+        <div class="row featurette">
+            <div class="col-md-4 content-align-center">
+                <h1 class="mt-5 display-5 font-weight-bold text-center text-primary featurette-heading">
 
-        <div class="d-flex d-inline justify-content-center  align-items-center mt-1 mr-1 mb-3 flex-row">
-            <div class="p-2 bd-highlight"> <a href="" class="lead text-dark">Why Hybrid Market Place?</a></div>
-             
-             <div class="p-2 dropdown">
-                    <a class="lead text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Projects
+                    HYBRID MARKET PLACE
+
+                </h1>
+                <h5 class="text-center my-5 p-2">
+    FOR WEB APPLICATIONS
+                </h5>
+                <p class="lead text-center my-3 p-2">
+                    Find Tools, Components and Modules to build on and improve your workflow.
+                </p>
+
+                <p class="text-muted my-3 text-center">Plan, Develop and Publish.</p>
+                <p class="text-center">
+                    <a href="{{path('marketplace')}} " class="btn btn-warning font-weight-bold my-3">
+                        SHOP NOW
+                        <i class="fa fa-shopping-cart"></i>
                     </a>
-                    <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Support</a>
-                        <a class="dropdown-item" href="#">Get Promo Code</a>
 
-                    </div>
-                </div>
-            <div class="p-2 bd-highlight"><a href="" class="lead text-dark">Our Blog</a></div>
-        </div>
-        <div class="jumbotron text-center bg-light">
-            <h1 class="display-4"> HMP </h1>
-            <p class=""> A Hybrid Market Place for Web Applications</p>
-            <hr class="my-4">
-            <p class=""> Create and Innovate</p>
+                </p>
 
-            <div class="d-flex justify-content-center">
-
-                <div class="p-2">
-                    <a href="{{path('app_login')}} "class=" btn btn-info text-uppercase" href=""> SIGN IN </a>
-                </div>
-                <div class="p-2">
-                    <a href="{{path('app_register')}} "class=" btn btn-outline-warning text-uppercase" href=""> SIGN UP </a>
-                </div>
             </div>
-                
-                <hr>
-        </div>
+            <div class="col-md-8 content-align-center text-center">
+                <h2 class="text-center font-weight-bold my-5 p-2">
+                    LATEST WEB APPLICATIONS
+                </h2>
+                {%for project in project | slice(0,6)%}
 
-        <div class="alert alert-light" role="alert">
-            Latest Software!
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                
-            </div>
-            <div class="col-md-8">
-                <ul class="list-unstyled">
-                    <li class="media">
-                        <img class="mr-3" src="{{asset('assets/images/icon/h1.jpg') }}" style="width:64px;height: 64px" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1"> App Store <a class="text-success" href=""><i class="fa fa-download"></i></a> <span class="badge badge-warning">New</span></h5>
-                            Web Store is web systems that hosts Http services for multiple applications on the client side.
-                            <div class="d-flex flex-row">
-                                <div class="p-2"><a href=""><i class="fa fa-facebook"></i></a></div>
-                                <div class="p-2"><a href=""><i class="fa fa-twitter"></i></a></div>
-                                <div class="p-2"><a href=""><i class="fa fa-youtube"></i></a></div>
-                            </div>
+                    <figure class="figure shadow-sm mx-1 p-3 col-sm-4 w-25">
+                        <div class="text-center">
+                            <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid rounded" alt="..." style="height:70px; width: 70px;">
                         </div>
-                    </li>
-                    <li class="media my-4">
-                        <img class="mr-3" src="{{asset('assets/images/icon/h2.png') }}"style="width:64px;height: 64px" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <h5 class="mt-0 mb-1">Download Api <a class="text-success" href=""><i class="fa fa-download"></i></a></h5>
 
-                            Best Web Api for all web browsers
-                            <div class="d-flex flex-row">
-                                <div class="p-2"><a href=""><i class="fa fa-facebook"></i></a></div>
-                                <div class="p-2"><a href=""><i class="fa fa-twitter"></i></a></div>
-                                <div class="p-2"><a href=""><i class="fa fa-youtube"></i></a></div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                        <h6 class="text-center text-primary mt-1 mb-1" style="font-size: 14px;">
+                            <a href="{{path('marketplace_show_project', {id: project.id})}}">
+                                {{project.title | capitalize}}</a>
+                            <i class="text-success fa fa-check-circle"></i>
+                        </h6>
+
+                        <figcaption class="figure-caption mt-1">
+                            {{project.description | slice(0,40)~'...'}}
+                        </figcaption>
+
+
+                    </figure>
+                    {%endfor%}
+                </div>
             </div>
+            
         </div>
     </div>
 
 
-{% endblock %}
+    <div class="container-fluid">
+        <hr class="my-2">
+        <div class="row featurette">
+
+            <div class="col-md-4 content-align-center text-center">
+                <img src="{{asset('assets/images/landingpage/600.png')}}" class=" my-5 p-2 text-center w-100 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" focusable="false" role="img" aria-label="Placeholder: 500x500">
+            </div>
+
+            <div class="col-md-8 content-align-center text-center">
+                <h2 class="text-center font-weight-bold my-5 p-2">
+                    LATEST WEB APPLICATIONS
+                </h2>
+                {%for project in project | slice(0,6)%}
+
+                    <figure class="figure shadow-sm mx-1 p-3 col-sm-4 w-25">
+                        <div class="text-center">
+                            <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid rounded" alt="..." style="height:70px; width: 70px;">
+                        </div>
+
+                        <h6 class="text-center text-primary mt-1 mb-1" style="font-size: 14px;">
+                            <a href="{{path('marketplace_show_project', {id: project.id})}}">
+                                {{project.title | capitalize}}</a>
+                            <i class="text-success fa fa-check-circle"></i>
+                        </h6>
+
+                        <figcaption class="figure-caption mt-1">
+                            {{project.description | slice(0,40)~'...'}}
+                        </figcaption>
+
+
+                    </figure>
+                    {%endfor%}
+                </div>
+            </div>
+
+        </div>
+        <footer class="my-5 pt-5 text-muted text-center text-small" style="font-size: 12px">
+            <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#">Privacy</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Terms</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">Support</a>
+                </li>
+            </ul>
+        </footer>
+
+
+    {% endblock %}

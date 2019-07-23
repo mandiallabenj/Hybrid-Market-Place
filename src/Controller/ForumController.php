@@ -4,16 +4,23 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ArticleType;
+use App\Entity\Article;
 
 class ForumController extends AbstractController
 {
     /**
      * @Route("/forum", name="forum")
      */
-    public function index()
+    public function forum()
     {
-        return $this->render('forum/index.html.twig', [
-            'controller_name' => 'ForumController',
+        $article = new Article();
+        
+        $form = $this->createForm(ArticleType::class, $article);
+        
+        
+        return $this->render('forum/forum.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

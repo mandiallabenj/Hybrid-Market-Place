@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+{% block title %}Checkout{% endblock %}
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
+            </ul>
+            {%if is_granted ('ROLE_USER')  %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <i class="fa fa-code-fork text-white mx-1"></i>
+                            Collaborator Requests
+                            <span class="py-1 mx-1 badge-pill badge-danger" style="font-weight: bold;   font-size: .70em">10</span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <div class="list-group mt-1" style="font-size: 13px;">
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none; ">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Voice Recognition App</h6>
+
+                                    </div>
+                                    <p class="mb-1">Built on top of the Symfony Components ..</p>
+                                    <small>Request From mandialla benj</small>
+                                    <br>
+                                    <small>3 days ago</small>
+
+
+                                </a>
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none;">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Love Match</h6>
+                                    </div>
+                                    <p class="mb-1">Symfony doesn't provide a component to work with the database ...</p>
+                                    <small class="text-muted">Request From Elos</small>
+                                    <br>
+                                    <small>3 days ago</small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown mx-2 border-right border-left">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle">
+                            <small class="text-success mx-1">Signed in As
+                            </small>
+                            <span class="text-secondary">
+                                {{app.user.username | lower}}
+                            </span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <a class="text-info dropdown-item" href="#"></a>
+                            <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                            <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item " href="">Help
+                            </a>
+                            <a class="dropdown-item " href="">Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            {%else%}
+
+                <span class="p-1">
+                    <a href="{{path('app_login')}} " class=" btn btn-info text-uppercase" href="">
+                        SIGN IN
+                    </a>
+                </span>
+                <span class="p-1">
+                    <a href="{{path('app_register')}} " class=" btn btn-outline-warning text-uppercase" href="">
+                        SIGN UP
+                    </a>
+                </span>
+
+
+            {%endif%}
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="nav-space-checkout mt-4 p-2 mx-auto">
+            <div class="container">
+
+            {#
+            List project by particular id to process checkout
+               #}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1 class="checkout-header">Checkout</h1>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-6 active">Project</th>
+                                    <th class="col-xs-3 active text-center">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+                                    <th class="col-xs-6 checkout-product-name">{{ project.title }}</th>
+                                    <td class="col-xs-3">{{ project.description }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="col-xs-6 info">Total</th>
+                                    <td class="col-xs-3 info checkout-total">$</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <form action="" method="POST">
+                        {#
+                        Display fillout form for VISA payment
+                        #}
+                            <script
+                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="{{stripe_public_key}}"
+                                data-amount="999"
+                                data-name="{{project.title}}"
+                                data-description="Widget"
+                                data-image="{{asset('assets/images/logo/logo.png')}}"
+                                data-locale="auto">
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

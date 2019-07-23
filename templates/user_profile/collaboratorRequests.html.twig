@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{(app.user.username | title)}} | Collaborators{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
+            </ul>
+            <div class="nav-item dropdown border-right border-left">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle"> 
+                    <small class="text-success mx-1">Signed in As </small>  <span class="text-white"> {{app.user.username | lower}} </span>
+                </a>
+                <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                    <a class="text-info dropdown-item" href="#"> </a>
+                    <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                    <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="">Help </a>
+                    <a class="dropdown-item " href="">Settings </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar mt-3">
+                    <div class="sidebar-sticky text-secondary">
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Hi, {{(app.user.username | title)}}</span>
+                            <a class="d-flex align-items-center text-muted" href="#">
+
+                            </a>
+                        </h6>
+                        <hr>
+                        <ul style="font-size: 14px;" class="nav flex-column text-secondary">
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" href="#">
+                                    <i class="fa fa-user-o"></i>  Profile 
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary active" href="#">
+                                    <i class="fa fa-folder-open"></i>   My Projects
+                                </a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">
+                                    <i class="fa fa-bar-chart"></i>  Reports
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">
+                                    <i class="fa fa-code-fork"></i> Requests
+                                    <span class="d-inline badge badge-warning"> New</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">
+                                    <i class="fa fa-handshake-o"></i> Collaborations
+                                    <span class="d-inline badge badge-">  </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                        <hr>
+                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                            <span>Transactions</span>
+                            <a class="d-flex align-items-center text-muted" href="#">
+
+                            </a>
+                        </h6>
+                        <ul style="font-size: 14px;" class="nav flex-column text-secondary">
+
+
+                            <li class="nav-item">
+                                <a class="nav-link active text-secondary" href="#">
+                                    <i class="fa fa-credit-card"></i>  Payouts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">
+                                    <i class="fa fa-briefcase"></i>   Donations
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h5 class="">Collaborator Requests <span class="badge badge-warning"> {{crproject | length}} </span></h5>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+
+                            <div class="btn-group mr-2">
+                                <a href="{{path('project_upload')}}" class="btn btn-sm btn-primary">Start A Project</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <ul style="font-size: 14px;" class="list-unstyled mt-3">
+
+                        {%for crproject in crproject%}
+                            {% set CollaboratorRequestMatchCount = 0 %}
+                            {%for project in project%}
+                                {%if project.id == crproject.project.id%}
+                                    {% set CollaboratorRequestMatchCount = CollaboratorRequestMatchCount + 1 %}
+                                    <li class="media my-3 shadow-sm p-2">
+                                        <img class="mr-3 rounded" src="{{asset('uploads/profile/doc.png') }}" style="width:45px;height: 45px" alt=" image">
+                                        <div class="media-body">
+                                            <h6 style="font-size: 14px;" class="text-dark mt-0 mb-1">
+                                                <a class="" href="#"> {{crproject.user.username | capitalize}}</a>
+                                                Interested in <a href="{{path('marketplace_show_project', {id: crproject.project.id})}}"> {{crproject.project.title | capitalize}}</a>
+                                                <i class="text-success fa fa-check-circle"></i>
+                                            </h6>
+
+                                            <p class=""> {{crproject.reason}}</p>
+                                            <a href="{{crproject.githubUrl}}" target="_blank" class="text-secondary font-weight-bold"> <i class="text-dark fa fa-globe"></i> GitHub URL</a>
+
+
+                                            <div class="d-flex flex-row light my-1" style="font-size:14px;">
+                                                <div class="bd-highlight">
+                                                    <a class="nav-link text-success" href="{{path('marketplace_show_project', {id: crproject.project.id})}}">
+                                                        <i style="font-size: 16px;" class="fa fa-thumbs-o-up"></i> Accept
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="bd-highlight">
+                                                    <a class="nav-link text-danger" href="#">
+                                                        <i style="font-size: 16px;" class="fa fa-thumbs-o-down"></i> Decline
+                                                        </span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </li>
+                                {%endif%}
+                            {%endfor%}
+
+                        {%else%}
+                            None
+
+                        {%endfor%}
+                        
+                    </ul>
+
+                </main>
+            </div>
+        </div>
+
+
+
+    </div>
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+{% endblock %}

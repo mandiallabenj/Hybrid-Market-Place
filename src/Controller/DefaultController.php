@@ -1,9 +1,13 @@
 <?php
 
+/* 
+Default controller displays the landing page
+*/
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Project;
 
 class DefaultController extends AbstractController
 {
@@ -12,8 +16,17 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
+        $project = $this->getDoctrine()->getRepository(Project::class)->findAll();
+
+        if (!$project) {
+            throw $this->createNotFoundException(
+                    'No projects yet found for id '
+            );
+        }
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
+            'project' => $project,
         ]);
     }
 }

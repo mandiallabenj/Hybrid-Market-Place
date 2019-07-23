@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "doctrine/annotations": "^1.6",
         "sensio/framework-extra-bundle": "^5.2",
+        "stripe/stripe-php": "^6.40",
         "symfony/asset": "4.2.*",
         "symfony/cache": "4.2.*",
         "symfony/console": "4.2.*",

@@ -5,11 +5,12 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
 use App\Entity\Project;
 use App\Entity\Screenshot;
 use App\Entity\Issues;
 use App\Entity\Projectfiles;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MarketPlaceController extends AbstractController {
@@ -61,7 +62,7 @@ class MarketPlaceController extends AbstractController {
 
 
         $form = $this->createFormBuilder($issue)
-                ->add('issue', TextType::class, ['label' => 'Type issues'])
+                ->add('issue', TextareaType::class, ['label' => 'Type issues'])
                 ->add('Report', SubmitType::class)
                 ->getForm();
 

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donate | {{project.title | upper}} !{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
+            </ul>
+            <div class="nav-item dropdown border-right border-left">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle"> 
+                    <small class="text-success mx-1">Signed in As </small>  <span class="text-secondary"> {{app.user.username | lower}} </span>
+                </a>
+                <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                    <a class="text-info dropdown-item" href="#"> </a>
+                    <a class="dropdown-item " href="#">My Profile</a>
+                    <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="">Help </a>
+                    <a class="dropdown-item " href="">Settings </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <div class="py-5 text-center">
+
+            <h3 class="text-primary">{{project.title | upper}}</h3>
+            <p class="lead"> Get started </p>
+
+            <h2 class="my-2 upper">Choose form of Payment</h2>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card border-0">
+                    <div class="card-img-top text-center">
+                        <a href="#"> <img src="{{asset('uploads/payment/airtel.png')}}" class="mx-auto shadow" width="200" height="150" alt=""></a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text lead">
+                            Use Airtel Money
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card border-0">
+                    <div class="card-img-top text-center">
+                        <a href="#"> <img src="{{asset('uploads/payment/mtn.jpg')}}" class="mx-auto shadow" alt="" width="200" height="150"></a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text lead">
+                            Use MTN Money
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+            <footer class="my-5 pt-5 text-muted text-center text-small">
+                <p class="mb-1">© 2017-2019 Company Name</p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Privacy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Support</a></li>
+                </ul>
+            </footer>
+        </div>
+    {% endblock %}

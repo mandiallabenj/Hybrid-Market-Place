@@ -15,7 +15,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
@@ -31,7 +31,7 @@ security:
 
             # activate different ways to authenticate
 
-            # http_basic: true
+            http_basic: ~
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             # form_login: true
@@ -40,12 +40,16 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # require ROLE_ADMIN for /admin*
+        
+         - { path: ^/admin, roles: ROLE_ADMIN }
+         
+         - { path: ^/admin/dashboard, roles: ROLE_ADMIN }
         
         # but, definitely allow /login to be accessible anonymously
-       # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/marketplace, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/marketplace/, roles: IS_AUTHENTICATED_FULLY }
         # if you wanted to force EVERY URL to be protected
-       # - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 

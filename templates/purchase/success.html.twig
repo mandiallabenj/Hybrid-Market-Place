@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+{% block title %}Checkout{% endblock %}
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('forum')}}"> Forum </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
+            </ul>
+            {%if is_granted ('ROLE_USER')  %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <i class="fa fa-code-fork text-white mx-1"></i>
+                            Collaborator Requests
+                            <span class="py-1 mx-1 badge-pill badge-danger" style="font-weight: bold;   font-size: .70em">10</span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <div class="list-group mt-1" style="font-size: 13px;">
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none; ">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Voice Recognition App</h6>
+
+                                    </div>
+                                    <p class="mb-1">Built on top of the Symfony Components ..</p>
+                                    <small>Request From mandialla benj</small>
+                                    <br>
+                                    <small>3 days ago</small>
+
+
+                                </a>
+                                <a class="list-group-item list-group-item-action flex-column align-items-start" href="#" style="border:none;">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Love Match</h6>
+                                    </div>
+                                    <p class="mb-1">Symfony doesn't provide a component to work with the database ...</p>
+                                    <small class="text-muted">Request From Elos</small>
+                                    <br>
+                                    <small>3 days ago</small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown mx-2 border-right border-left">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle">
+                            <small class="text-success mx-1">Signed in As
+                            </small>
+                            <span class="text-secondary">
+                                {{app.user.username | lower}}
+                            </span>
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu mt-3 w-100 shadow" style="font-size: 14px;">
+                            <a class="text-info dropdown-item" href="#"></a>
+                            <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                            <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item " href="">Help
+                            </a>
+                            <a class="dropdown-item " href="">Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            {%else%}
+
+                <span class="p-1">
+                    <a href="{{path('app_login')}} " class=" btn btn-info text-uppercase" href="">
+                        SIGN IN
+                    </a>
+                </span>
+                <span class="p-1">
+                    <a href="{{path('app_register')}} " class=" btn btn-outline-warning text-uppercase" href="">
+                        SIGN UP
+                    </a>
+                </span>
+
+
+            {%endif%}
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="nav-space-checkout mt-4 p-2 mx-auto">
+            <div class="container">
+
+                {#
+                List project by particular id to process checkout
+                   #}
+                <div class="row">
+
+                    <div class="mx-auto">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade shadow mt-1 show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}                                
+                        <div class="alert alert-light shadow my-2">
+                            <h4><a href="{{path('marketplace_show_project' ,{id: project.id})}}" class="alert-link text-primary">{{ project.title }}</a></h4><span class="badge badge-success"><small>Payment Received</small></span>
+                            <p class="lead">
+                                {{ project.description }}
+                            </p>
+
+                        </div>
+
+                        <div class="border-0 my-3 p-2 shadow">
+                            <div style="font-size: 13px" class="tab-pane fade show" id="file" role="tabpanel" aria-labelledby="file-tab">
+
+                                <h6 class="lead font-italic"> Project Files | <small class="mx-2">
+                                        <i class="fa fa-tag"></i> Releases 
+                                        <span class="badge badge-warning">{{projectfile | length}}</span></small></h6>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Version</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col">File Download</th>
+                                            <th scope="col">Features</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {%for projectfile in projectfile %}
+                                            <tr>
+                                                <th scope="row">{{ loop.index}}</th>
+                                                <td>
+                                                    {%if projectfile.versionName == null%}
+                                                        N/A
+                                                    {%else%}
+                                                        {{projectfile.versionName}}
+                                                    {%endif%}                                                
+                                                </td>
+                                                <td>{{ projectfile.createdAt | date_modify('+1 day') | date('m/d/y')}}</td>
+                                                <td>N/A</td>
+                                                <td><a href="{{asset('uploads/project/projectfile/'~ projectfile.projectfile)}}"> <i class="fa fa-download text-success"></i> Download</a></td>
+
+                                                <td>
+                                                    {%if projectfile.features == null%}
+                                                        N/A
+                                                    {%else%}
+                                                        {{projectfile.features}}
+                                                    {%endif%}                                                
+                                                </td>
+                                            </tr>
+                                        {%else%}
+
+                                        <div class="border alert border-danger my-3 text-danger p-2">
+                                            Oops, No Files Yet For this Project
+                                        </div>
+                                    {%endfor%}
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="font-size: 12px" class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+{% endblock %}

@@ -46,7 +46,7 @@ private $description;
 private $publishedAt;
 
 /**
- * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="projects" ,cascade={"persist"})
+ * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects" ,cascade={"persist"})
  * @ORM\JoinColumn(nullable=false)
  */
 private $user;
@@ -79,6 +79,31 @@ private $category;
  */
 private $screenshots;
 
+/**
+ * @ORM\Column(type="string", length=255, nullable=true)
+ */
+private $isEnterprise;
+
+/**
+ * @ORM\OneToMany(targetEntity="App\Entity\Collaborator", mappedBy="project")
+ */
+private $collaborators;
+
+/**
+ * @ORM\Column(type="string", length=255, nullable=true)
+ */
+private $isblocked;
+
+/**
+ * @ORM\Column(type="string", length=255, nullable=true)
+ */
+private $isApproved;
+
+/**
+ * @ORM\Column(type="integer", nullable=true)
+ */
+private $price;
+
 
 
 public function __construct()
@@ -88,6 +113,7 @@ public function __construct()
     $this->donations = new ArrayCollection();
     $this->projectfiles = new ArrayCollection();
     $this->screenshots = new ArrayCollection();
+    $this->collaborators = new ArrayCollection();
 }
 
 
@@ -297,6 +323,85 @@ public function removeScreenshot(Screenshot $screenshot): self
             $screenshot->setProject(null);
         }
     }
+
+    return $this;
+}
+
+public function getIsEnterprise(): ?string
+{
+    return $this->isEnterprise;
+}
+
+public function setIsEnterprise(?string $isEnterprise): self
+{
+    $this->isEnterprise = $isEnterprise;
+
+    return $this;
+}
+
+/**
+ * @return Collection|Collaborator[]
+ */
+public function getCollaborators(): Collection
+{
+    return $this->collaborators;
+}
+
+public function addCollaborator(Collaborator $collaborator): self
+{
+    if (!$this->collaborators->contains($collaborator)) {
+        $this->collaborators[] = $collaborator;
+        $collaborator->setProject($this);
+    }
+
+    return $this;
+}
+
+public function removeCollaborator(Collaborator $collaborator): self
+{
+    if ($this->collaborators->contains($collaborator)) {
+        $this->collaborators->removeElement($collaborator);
+        // set the owning side to null (unless already changed)
+        if ($collaborator->getProject() === $this) {
+            $collaborator->setProject(null);
+        }
+    }
+
+    return $this;
+}
+
+public function getIsblocked(): ?string
+{
+    return $this->isblocked;
+}
+
+public function setIsblocked(?string $isblocked): self
+{
+    $this->isblocked = $isblocked;
+
+    return $this;
+}
+
+public function getIsApproved(): ?string
+{
+    return $this->isApproved;
+}
+
+public function setIsApproved(?string $isApproved): self
+{
+    $this->isApproved = $isApproved;
+
+    return $this;
+}
+
+public function getPrice(): ?int
+{
+    return $this->price;
+}
+
+public function setPrice(?int $price): self
+{
+    $this->price = $price;
 
     return $this;
 }

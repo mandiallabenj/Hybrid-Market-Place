@@ -19,6 +19,10 @@ class ProjectFileType extends AbstractType {
         $builder
                 ->add
                 ('versionName',TextType::class, [
+                    'attr'=> [
+                        'placeholder'=>'Alpha 1.6',
+                        'class'=>'lead'
+                    ],
                     'required'=> TRUE,
                     'constraints' => [
                         new NotBlank([

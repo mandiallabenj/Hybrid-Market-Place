@@ -1,10 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{#
+
+Project View
+This displays a project and its all details of a project.
+
+#}
+
 {% block title %} {{project.title|capitalize}}{% endblock %}
 
 {% block body %}
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
@@ -14,12 +21,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                              
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('home')}}">Home</a>
+                    <a class="nav-link active" href="{{path('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{path('marketplace')}}">Market Place </a>
+                    <a class="nav-link" href="{{path('marketplace')}}">Market Place </a>
                 </li>
 
                 <li class="nav-item">
@@ -29,25 +36,65 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#"> FAQ's </a>
                 </li>
-                
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
             </ul>
-                <div class="nav-item dropdown border-right border-left">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="img-circle"> 
-                        <small class="text-success">Signed in As </small>  <span class="text-secondary"> {{app.user.username | lower}} </span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+
+                    <a href="#" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-code-fork text-white mx-1"></i> Collaborator Requests 
+                        <span style="font-weight: bold;   font-size: .70em" class="py-1 mx-1 badge-pill badge-danger">10</span>
                     </a>
-                    <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown">
-                        <a class="text-info dropdown-item" href="#"> </a>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href=""> Help </a>
-                        <a class="dropdown-item" href=""> Settings </a>
-                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
+                    <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                        <div class="list-group mt-1" style="font-size: 13px;">
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none; ">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Voice Recognition App</h6>
+
+                                </div>
+                                <p class="mb-1">Built on top of the Symfony Components ..</p>
+                                <small>Request From mandialla benj</small>
+                                <br>
+                                <small>3 days ago</small>
+
+
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none;">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Love Match</h6>
+                                </div>
+                                <p class="mb-1">Symfony doesn't provide a component to work with the database ...</p>
+                                <small class="text-muted">Request From Elos</small>
+                                <br>
+                                <small>3 days ago</small>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </li>
+                <li class="nav-item dropdown mx-2 border-right border-left">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle"> 
+                        <small class="text-success mx-1">Signed in As </small>  <span class="text-secondary"> {{app.user.username | lower}} </span>
+                    </a>
+                    <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                        <a class="text-info dropdown-item" href="#"> </a>
+                        <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                        <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href="">Help </a>
+                        <a class="dropdown-item " href="">Settings </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+
         </div>
     </nav>
+
     <div class="container-fluid">
 
         <div class="row">
@@ -57,28 +104,38 @@
                         <img class="mr-3 my-5 " src="{{asset('uploads/project/icons/'~ project.icon) }}" style="width:64px;height: 64px" alt="Generic placeholder image">
                     </div>
                     <div class="mt-2"  style="font-size:14px;" >
-                        <p class="mt-2 text-center"><i class="text-success fa fa-check-circle"></i> Verified by Hybrid Market Place</p>
+                        <p class="mt-2 text-center"> {%if project.isApproved == 'YES'%} <i class="text-success fa fa-check-circle"></i>{%endif%} Verified by Hybrid Market Place</p>
                         <p class="my-2">Hybrid Market Place confirms that this app meets the <a href="#">requirements for verification.</a></p>
 
-                        {%for projectfile in projectfile | slice(0,1)%}
+                        {%if project.isApproved == 'YES'%}
+                            <p class="my-3"><small> Status : Complete</small></p>
 
-
-                            <p class="my-3"><small> Status : Incomplete</small></p>
-
-                            <p class="my-3"><small> Percentage : 75%</small></p>
+                            <p class="my-3"><small> Percentage : 100%</small></p>
                             <div class="progress my-3" style="height: 2px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
+
                         {%else%}
-                            <p class="my-3"><small> Status : Incomplete</small></p>
 
-                            <p class="my-3"><small> Percentage : 25%</small></p>
-                            <div class="progress my-3" style="height: 2px;">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            {%for projectfile in projectfile | slice(0,1)%}
 
-                        {%endfor%}
 
+                                <p class="my-3"><small> Status : Incomplete</small></p>
+
+                                <p class="my-3"><small> Percentage : 75%</small></p>
+                                <div class="progress my-3" style="height: 2px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            {%else%}
+                                <p class="my-3"><small> Status : Incomplete</small></p>
+
+                                <p class="my-3"><small> Percentage : 25%</small></p>
+                                <div class="progress my-3" style="height: 2px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+                            {%endfor%}
+                        {%endif%}
                         <code class="my-2 text-dark"> Supported Languages</code>
                         <p class="my-2"> 
                             PHP, Symfony Framework
@@ -86,9 +143,11 @@
                         <code class="my-2 text-dark"> Author </code><a href="#"> {{project.user.username | capitalize}}</a>
                         <div class="d-flex mt-3 flex-column" style="font-size:13px;">
                             <h6> Developer Links</h6>
-                            <div class="">
-                                <a href="{{path('become_collaborator',{id: project.id})}}"> Become a Collaborator </a>                                     
-                            </div>
+                            {%if project.isBlocked == 'NO'%}
+                                <div class="">
+                                    <a href="{{path('become_collaborator',{id: project.id})}}"> Become a Collaborator </a>                                     
+                                </div>
+                            {%endif%}
                             <div class="">
                                 <a href="#"> Status </a>                                     
                             </div>
@@ -136,248 +195,292 @@
 
             <div class="col-md-9">
 
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+
+
                 <div class="alert-light my-5">
-
-
                     <small> Application/{{project.category | capitalize}} </small>
 
                     <div class="d-flex flex-row">
-                        <h1 class="mt-1 p-1">{{project.title|capitalize}}</h1>
-                        {% if app.user.id == project.user.id%}
-                            <a  style="font-size:14px;" class="p-1 mx-1 text-secondary" href="{{path('project_edit' ,{id: project.id})}}"><i class="fa fa-edit"></i> edit</a>
-                            <a  style="font-size:14px;" class="p-1 mx-1 text-secondary" href="{{path('project_upload_file', {id: project.id})}}"><i class="fa fa-cloud-upload"></i> Upload File </a>
-                            <a  style="font-size:14px;" class="p-1 mx-1 text-secondary" href="{{path('screenshot_upload', {id: project.id})}}"><i class="fa fa-plus-square"></i> Screenshots </a>
-                            <a  style="font-size:14px;" class="p-1 mx-1 text-secondary" href="#"><i class="fa fa-times text-danger"></i> Deactivate </a>
-                        {%endif%}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a style="font-size:14px;" class="p-1 mx-1 disabled text-danger" aria-disabled="true" role="button" href="{{path('project_delete', {id: project.id})}}" ><i class="fa fa-trash"></i> delete</a>
-                        {% endif %}
-
+                        <h1 class="mt-1 p-1">{{project.title|capitalize}}</h1> 
+                        <a href="" class="text-dark font-weight-bold"><i class="fa fa-tag text-danger"></i> USD 9.99 </a>
                     </div>
 
-                    <small class="my-2">Published On : {{project.publishedAt |date("F jS 20y")}}</small>
+                    <div class="my-1">
+                        {% if app.user.id == project.user.id%}
+                            <a  style="font-size:11px;" class="p-1 mx-1 text-secondary" href="{{path('project_edit' ,{id: project.id})}}"><i class="fa fa-edit"></i> edit</a>
+                            <a  style="font-size:11px;" class="p-1 mx-1 text-secondary" href="{{path('project_upload_file', {id: project.id})}}"><i class="fa fa-cloud-upload"></i> Upload File </a>
+                            <a  style="font-size:11px;" class="p-1 mx-1 text-secondary" href="{{path('screenshot_upload', {id: project.id})}}"><i class="fa fa-plus-square"></i> Screenshots </a>
+                            <a  style="font-size:11px;" class="p-1 mx-1 text-secondary" href="#"><i class="fa fa-times text-danger"></i> Deactivate </a>
+                        {%endif%}
+                    </div>
+                    <small class="mt-1">Published On : {{project.publishedAt |date("F jS 20y")}}</small>
+
 
                     <p class="lead mt-1"  style="font-size:13px;">
                         {{project.description}}                           
                     </p>
 
-                    <p class="my-2 lead" style="font-size:14px;"><code class="text-danger"> important !</code> <a href="/docs/4.3/">Read our Documentation</a> if need be, too.</p>
+                    {%if project.isBlocked == 'NO'%}
+                        <p class="my-2 lead" style="font-size:14px;">
+                            Access project via <a href="#" class="alert-link">Github</a></p>
+                        {%endif%}
+                    <p class="my-2 lead" style="font-size:14px;">
+
+                        <code class="text-danger"> important !</code> 
+                        <a href="">Read our Documentation</a> if need be, too.
+                    </p>
+
 
                     <small class="disabled"> Rating <span class="bg-light"> 4.0</span></small>
 
                     <div class="d-flex flex-row my-3">
+                        {%if project.isBlocked == 'NO'%}
+                            <div class="shadow">
+                                <a class="btn btn-sm btn-primary" href="{{path('donate', {id: project.id})}}"><i class="fa fa-donate"></i> Donate </a>
 
-                        <div class="shadow">
-                            <a class="btn btn-sm btn-primary" href="{{path('donate', {id: project.id})}}"><i class="fa fa-dollar"></i> Donate </a>
+                            </div>  
+                        {%endif%}
 
-                        </div>      
+
+                        {% if (project.isEnterprise == 'YES' and project.isApproved == "YES")%}    
+                            <div class="shadow mx-2">
+                                <a class="btn btn-sm btn-success" href="{{path('purchase',{id: project.id})}}"><i class="fa fa-shopping-cart"></i> Purchase </a>
+                            </div>  
+                        {%else%}
+                            {% if app.user.id == project.user.id %}
+                                <div class="shadow mx-2">
+                                    <a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#requestforenterprise" role="button" aria-expanded="false" aria-controls="requestforenterprise"><i class="fa fa-circle on fa-dollar"></i> Request For Enterprise </a>
+                                </div> 
+
+                            {%endif%}
+                        {% endif%}
+
+                    </div>
+                    <div class="collapse" id="requestforenterprise">
+                        <div class="card card-body mt-5">
+                            <p class="card-text">
+                                Start earning money from your hard work. <a href="#" class="font-weight-bold btn-outline-success btn-sm"><i style="font-size:.90em" class="fa fa-spinner fa-spin fa-3x fa-fw pmx-1"></i>Proceed</a>
+                            </p>
+                            <p class="card-text">
+                                <small>Please read <a href="#">Terms and Conditions Apply</a></small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                {%if project.isBlocked == 'YES'%}
+                    <div class="border alert border-danger my-3 text-danger p-2">
+                        <h5 class="text-danger">Project has been Blocked</h5>
                     </div>
 
-                    <div class="collapse" id="donateform">
-                        <div class="card border-left alert-light card-body">
-                            <form style="font-size:14px;">
-                                <div class="form-group">
-                                    <label for="formGroupExampleInput">Credit Points: <stong class="btn-link"> 1500</stong></label>
-                                    <div class="input-group mb-3">
-                                        <input style="font-size:14px;" type="text" class="form-control" placeholder="Enter Amount" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sm btn-outline-secondary" type="button" id="button-addon2">Accept</button>
-                                        </div>
+                {%else%}
+                    <ul style="font-size:14px;" id="project-nav" class="nav justify-content-center nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link  mx-1 my-1 active" id="details-tab" data-toggle="pill" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link  mx-1 my-1" id="file-tab" data-toggle="pill" href="#file" role="tab" aria-controls="file" aria-selected="true">File | <i class="fa fa-tag"></i> Releases <span class="badge badge-success">{{numberOffilesByProject | number_format}}</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link mx-1 my-1" id="screenshots-tab" data-toggle="pill" href="#screenshots" role="tab" aria-controls="screenshots" aria-selected="true">Screenshots</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  mx-1 my-1" id="reviews-tab" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Reviews <span class="badge badge-warning">105</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  mx-1 my-1" id="issues-tab" data-toggle="pill" href="#issues" role="tab" aria-controls="issues" aria-selected="true"><i class="fa fa-flag"></i> Issues 
+                                <span class="badge badge-danger">  
+                                    {{NumberOfIssues | number_format}}
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  mx-1 my-1" id="documentation-tab" data-toggle="pill" href="#documentation" role="tab" aria-controls="documentation" aria-selected="true">  Documentation 
+                                <span class="badge badge-primary">  
+                                    0
+                                </span>
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <div style="font-size:14px;" class="tab-content my-3" id="myTabContent">
+                        <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="overview-tab"> 
+
+                            <table class="alert bg-light table table-borderless">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Author</th>
+                                        <td>mandiallbenj</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Size</th>
+                                        <td>123 MB</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Category</th>
+                                        <td colspan="2">Web</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Compatibility</th>
+                                        <td colspan="2">Chrome, Firefox, Safari, Opera mini</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Language</th>
+                                        <td colspan="2">English, French, Sapnish</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Copyright</th>
+                                        <td colspan="2">in Partnership with Hybrid Market Place</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Price</th>
+                                        <td colspan="2">Free</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div style="font-size: 13px" class="tab-pane fade show" id="file" role="tabpanel" aria-labelledby="file-tab">
+                            {%if project.isEnterprise == "No"%}
+                                <h6 class="lead font-italic"> Project Files | </h6>
+                                <div class="">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Version</th>
+                                                <th scope="col">Date | D/M/Y</th>
+                                                <th scope="col">Size</th>
+                                                <th scope="col">File Download</th>
+                                                <th scope="col">Features</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {%for projectfile in projectfile %}
+                                                <tr>
+                                                    <th scope="row">{{ projectfile.id | number_format}}</th>
+                                                    <td>
+                                                        {%if projectfile.versionName == null%}
+                                                            N/A
+                                                        {%else%}
+                                                            {{projectfile.versionName}}
+                                                        {%endif%}                                                
+                                                    </td>
+                                                    <td>{{ projectfile.createdAt | date('d/m/y')}}</td>
+                                                    <td>N/A</td>
+                                                    <td><a href="{{asset('uploads/project/projectfile/'~ projectfile.projectfile)}}"> <i class="mx-1 fa fa-download text-success"></i> Download</a></td>
+
+                                                    <td>
+                                                        {%if projectfile.features == null%}
+                                                            N/A
+                                                        {%else%}
+                                                            {{projectfile.features}}
+                                                        {%endif%}                                                
+                                                    </td>
+                                                </tr>
+                                            {%else%}
+
+                                            <div class="border alert border-danger my-3 text-danger p-2">
+                                                Oops, No Files Yet For this Project
+                                            </div>
+                                        {%endfor%}
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {%else%}
+
+                                <div class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
+
+                                    <div class="alert-body">
+                                        Oops, You're required to purchase this project 
+                                        <a href="{{path('purchase',{id: project.id})}}" class="font-weight-bold btn-outline-success btn-sm">
+                                            <i style="font-size:.90em" class="fa fa-spinner fa-spin fa-3x fa-fw pmx-1"></i>Continue
+                                        </a>
+                                    </div>
+
+                                </div>
+                            {%endif%}
+                        </div>
+
+                        <div class="tab-pane fade" id="screenshots" role="tabpanel" aria-labelledby="screenshots-tab">
+                            {%for screenshot in screenshot %}
+                                <div class="figure col-md-4">
+                                    <img class="p-2 my-2 img-thumbnail" src="{{asset('uploads/project/projectscreenshots/'~ screenshot.screenshot) }}" style="width:auto;height:auto" alt="Generic placeholder image">
+                                    {% if app.user.id == project.user.id%}
+                                        <a class="text-danger" href="{{path('screenshot_delete',{id: screenshot.id})}}">Delete</a>
+                                    {%endif%}
+                                </div>
+
+                            {%else%}
+
+                                <div class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
+
+                                    <div class="alert-body">
+                                        Oops, No Screenshots Yet concerning this project 
                                     </div>
 
                                 </div>
 
-                            </form>    
+                            {%endfor%}
                         </div>
-                    </div>
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab"> Reviews </div>
+                        <div class="tab-pane fade" id="issues" role="tabpanel" aria-labelledby="issues-tab"> 
 
+                            {%for issues in issues%}
+                                <div style="border-left: 2px solid #dc3545" class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="alert-header">
 
-
-                </div>
-
-
-                <ul style="font-size:14px;" id="project-nav" class="nav justify-content-center nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link  mx-1 my-1 active" id="details-tab" data-toggle="pill" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  mx-1 my-1" id="file-tab" data-toggle="pill" href="#file" role="tab" aria-controls="file" aria-selected="true">File | <i class="fa fa-tag"></i> Releases <span class="badge badge-success">{{numberOffilesByProject | number_format}}</span></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link mx-1 my-1" id="screenshots-tab" data-toggle="pill" href="#screenshots" role="tab" aria-controls="screenshots" aria-selected="true">Screenshots</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  mx-1 my-1" id="reviews-tab" data-toggle="pill" href="#reviews" role="tab" aria-controls="reviews" aria-selected="true">Reviews <span class="badge badge-warning">105</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  mx-1 my-1" id="issues-tab" data-toggle="pill" href="#issues" role="tab" aria-controls="issues" aria-selected="true"><i class="fa fa-flag"></i> Issues 
-                            <span class="badge badge-danger">  
-                                {{NumberOfIssues | number_format}}
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link  mx-1 my-1" id="documentation-tab" data-toggle="pill" href="#documentation" role="tab" aria-controls="documentation" aria-selected="true">  Documentation 
-                            <span class="badge badge-primary">  
-                                0
-                            </span>
-
-                        </a>
-                    </li>
-
-                </ul>
-
-                <div style="font-size:14px;" class="tab-content my-3" id="myTabContent">
-                    <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="overview-tab"> 
-
-                        <table class="alert bg-light table table-borderless">
-
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Author</th>
-                                    <td>mandiallbenj</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Size</th>
-                                    <td>123 MB</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Category</th>
-                                    <td colspan="2">Web</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Compatibility</th>
-                                    <td colspan="2">Chrome, Firefox, Safari, Opera mini</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Language</th>
-                                    <td colspan="2">English, French, Sapnish</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Copyright</th>
-                                    <td colspan="2">in Partnership with Hybrid Market Place</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Price</th>
-                                    <td colspan="2">Free</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div style="font-size: 13px" class="tab-pane fade show" id="file" role="tabpanel" aria-labelledby="file-tab">
-                        <h6 class="lead font-italic"> Project Files | </h6>
-                        <div class="">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Version</th>
-                                        <th scope="col">Date | D/M/Y</th>
-                                        <th scope="col">Size</th>
-                                        <th scope="col">File Download</th>
-                                        <th scope="col">Features</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    {%for projectfile in projectfile %}
-                                        <tr>
-                                            <th scope="row">{{ projectfile.id | number_format}}</th>
-                                            <td>
-                                                {%if projectfile.versionName == null%}
-                                                    N/A
-                                                {%else%}
-                                                    {{projectfile.versionName}}
-                                                {%endif%}                                                
-                                            </td>
-                                            <td>{{ projectfile.createdAt | date('d/m/y')}}</td>
-                                            <td>N/A</td>
-                                            <td><a href="{{asset('uploads/project/projectfile/'~ projectfile.projectfile)}}"> <i class="mx-1 fa fa-download text-success"></i> Download</a></td>
-
-                                            <td>
-                                                {%if projectfile.features == null%}
-                                                    N/A
-                                                {%else%}
-                                                    {{projectfile.features}}
-                                                {%endif%}                                                
-                                            </td>
-                                        </tr>
-                                    {%else%}
-
-                                    <div class="border alert border-danger my-3 text-danger p-2">
-                                        Oops, No Files Yet For this Project
+                                        <strong class="mr-auto"><i class="fa fa-user"></i> {{issues.user.username}} </strong>
+                                        <small class="text-muted"> Posted At {{issues.createdAt | date_modify('+1 day') | date('m/d/y')}}</small>
+                                        <button type="button" class="ml-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                {%endfor%}
+                                    <div class="alert-body">
+                                        {{issues.issue}} 
+                                    </div> 
+                                </div>
+                            {%else%}
+                                <div style="border-left: 2px solid #dc3545" class="toast alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
 
+                                    <div class="alert-body">
+                                        No Issues Yet concerning this project 
+                                    </div>
 
-                                </tbody>
-                            </table>
+                                </div>
+                            {%endfor%}
+
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="screenshots" role="tabpanel" aria-labelledby="screenshots-tab">
-                        {%for screenshot in screenshot %}
-                            <div class="figure col-md-4">
-                                <img class="p-2 my-2 img-thumbnail" src="{{asset('uploads/project/projectscreenshots/'~ screenshot.screenshot) }}" style="width:auto;height:auto" alt="Generic placeholder image">
-                                {% if app.user.id == project.user.id%}
-                                    <a class="text-danger" href="{{path('screenshot_delete',{id: screenshot.id})}}">Delete</a>
-                                {%endif%}
-                            </div>
-
-                        {%else%}
-
+                        <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab"> 
                             <div class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
 
                                 <div class="alert-body">
-                                    Oops, No Screenshots Yet concerning this project 
+                                    No Documentation Yet concerning this project 
                                 </div>
 
-                            </div>
-
-                        {%endfor%}
-                    </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab"> Reviews </div>
-                    <div class="tab-pane fade" id="issues" role="tabpanel" aria-labelledby="issues-tab"> 
-
-                        {%for issues in issues%}
-                            <div style="border-left: 2px solid #dc3545" class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="alert-header">
-
-                                    <strong class="mr-auto"><i class="fa fa-user"></i> {{issues.user.username}} </strong>
-                                    <small class="text-muted"> Posted At {{issues.createdAt | date_modify('+1 day') | date('m/d/y')}}</small>
-                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="alert-body">
-                                    {{issues.issue}} 
-                                </div> 
-                            </div>
-                        {%else%}
-                            <div style="border-left: 2px solid #dc3545" class="toast alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
-
-                                <div class="alert-body">
-                                    No Issues Yet concerning this project 
-                                </div>
-
-                            </div>
-                        {%endfor%}
-
-                    </div>
-                    <div class="tab-pane fade" id="documentation" role="tabpanel" aria-labelledby="documentation-tab"> 
-                        <div class="alert alert-light shadow-sm my-1" role="alert" aria-live="assertive" aria-atomic="true">
-
-                            <div class="alert-body">
-                                No Documentation Yet concerning this project 
                             </div>
 
                         </div>
-
                     </div>
-                </div>
-
+                {%endif%}
             </div>
 
         </div>

@@ -1,5 +1,10 @@
 <?php
 
+/*
+All methods that the project file entity uses
+*/
+
+
 namespace App\Controller;
 
 use App\Entity\Project;
@@ -14,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class ProjectFileController extends AbstractController {
 
     /**
+     * shows project file
      * @Route("/project/file", name="project_file")
      */
     public function index() {
@@ -23,6 +29,7 @@ class ProjectFileController extends AbstractController {
     }
 
     /**
+     * upload files for unique project
      * @Route("/project/upload/{id}/file" ,name="project_upload_file") 
      */
     public function projectfileupload(Request $request, $id) {

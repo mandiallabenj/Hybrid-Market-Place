@@ -3,7 +3,7 @@
 {% block title %}Forum{% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img src="{{asset('assets/images/logo/logo.png')}}" width="30" height="30" alt="HMP" class="shadow-sm">
@@ -13,22 +13,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user"></i> Account 
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 14px;">
-                        <a class="dropdown-item disabled" href=""><small>Signed in As </small></a>
-                        <a class="text-info dropdown-item" href="#"> {{app.user.username | title}}</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="{{path('user_projects')}}">My Projects</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href=""> Help </a>
-                        <a class="dropdown-item" href=""> Settings </a>
-                        <a class="text-danger dropdown-item" href="{{path('app_logout')}}">Log Out</a>
-                    </div>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{path('home')}}">Home</a>
                 </li>
@@ -37,39 +22,71 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contributors</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" href="{{path('forum')}}"> Forum </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> FAQ's </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> Support </a>
+                </li>
+
             </ul>
+            <div class="nav-item dropdown border-right border-left">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{asset('uploads/profile/profilepicture.jpg')}}" width="30" height="30" style="border-radius:50px" alt="" class="border border-success img-circle"> 
+                    <small class="text-success mx-1">Signed in As </small>  <span class="text-secondary"> {{app.user.username | lower}} </span>
+                </a>
+                <div class="dropdown-menu mt-3 w-100 shadow" aria-labelledby="navbarDropdown" style="font-size: 14px;">
+                    <a class="text-info dropdown-item" href="#"> </a>
+                    <a class="dropdown-item " href="{{path('user_profile')}}">My Profile</a>
+                    <a class="dropdown-item " href="{{path('user_projects')}}">My Projects</a>   
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item " href="">Help </a>
+                    <a class="dropdown-item " href="">Settings </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="text-danger dropdown-item text-secondary" href="{{path('app_logout')}}">Log Out</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <div class="container-fluid">
 
+        <h4 class="my-2 display-4 text-danger text-center">Join Forum</h4> 
+        <h4 class="my-2 lead text-danger text-center"> Questions and Answers platform for developers</h4> 
+        <div class="my-4 text-center">
+            <!-- Button trigger modal -->
+            <button class="btn btn-md btn-danger my-2 my-sm-0 shadow" type="button" class="btn btn-primary" data-toggle="modal" data-target="#askquestionform" type="submit">Ask A Question <i class="fa fa-question-circle"></i></button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="askquestionform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Get Started</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{form_start(form)}}
+                        {{form_widget(form)}}
+                        {{form_end(form)}}
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <hr class="text-center w-50">
 
         <div class="row mt-3">
 
             <div class="col-md-4">
-                <div class="alert alert-light shadow">
-                    <form>
-                        <div class="form-group">
-                            <label for="">Title</label>
-                            <input type="text" class="form-control lead" id="" placeholder="Ask a Question?">
-                        </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Additional Information</label>
-                            <textarea class="lead form-control" id="" rows="3" placeholder=" ... text here"></textarea>
-                        </div>
-
-                        <button class="btn btn-md btn-danger my-2 my-sm-0 shadow" type="submit">Ask A Question <i class="fa fa-question-circle"></i></button>
-                    </form>
-                </div>
-
-                <h4 class="text-secondary my-2"> Related Questions</h4>
-                <div class="list-group mt-3 shadow">
+                <h4 class="text-dark my-3 my-2"> Related Questions</h4>
+                <div class="list-group mt-3 shadow my-2">
                     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="border:none; ">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">Why Symfony 4.3?</h6>   
@@ -89,7 +106,6 @@
                 </div>
             </div>            
             <div class="col-md-8">
-                <h4 class="my-2"> Forum ~</h4>      
 
 
                 <div class="card border-0">

@@ -72,8 +72,7 @@ class ProjectController extends AbstractController {
 
             $this->addFlash('success', 'Your Project Was Created!');
 
-            return $this->render('project/projectupload.html.twig'
-            );
+           
         }
 
         return $this->render('project/projectupload.html.twig', [
@@ -271,5 +270,7 @@ class ProjectController extends AbstractController {
 
         return new JsonResponse(['hearts' => rand(5, 100)]);
     }
+    
+   
 
 }

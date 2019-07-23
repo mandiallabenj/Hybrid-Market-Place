@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $collaborators;
 
+    /**
+     * @ORM\Column(type="string", length=255,unique=true, nullable=true)
+     */
+    private $stripeCustomerId;
+
      
 
     public function __construct()
@@ -357,6 +362,18 @@ class User implements UserInterface
                 $collaborator->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStripeCustomerId(): ?string
+    {
+        return $this->stripeCustomerId;
+    }
+
+    public function setStripeCustomerId(?string $stripeCustomerId): self
+    {
+        $this->stripeCustomerId = $stripeCustomerId;
 
         return $this;
     }

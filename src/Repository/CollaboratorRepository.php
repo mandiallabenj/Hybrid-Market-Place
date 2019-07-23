@@ -36,15 +36,25 @@ class CollaboratorRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Collaborator
+    
+    public function findCollaboratorsByProject($value)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
+            ->andWhere('c.project = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
+     public function findNumberOfCollaboratorsByProject($value) {
+        return $this->createQueryBuilder('i')
+                        ->andWhere('i.project = :val')
+                        ->setParameter('val', $value)
+                        ->orderBy('i.id', 'ASC')
+                        ->select('COUNT(i.id) as numberOffilesByProject')
+                        ->getQuery()
+                        ->getSingleScalarResult()
+        ;
+    }
 }
