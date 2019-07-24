@@ -19,9 +19,10 @@ class DefaultController extends AbstractController
         $project = $this->getDoctrine()->getRepository(Project::class)->findAll();
 
         if (!$project) {
-            throw $this->createNotFoundException(
-                    'No projects yet found for id '
-            );
+            return $this->render('default/index.html.twig', [
+                'controller_name' => 'DefaultController',
+                'project' => $project,
+            ]);
         }
 
         return $this->render('default/index.html.twig', [

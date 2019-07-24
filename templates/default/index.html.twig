@@ -93,50 +93,20 @@
 
 
                     </figure>
+
+                    {%else%}
+                    <div class="alert alert-danger shadow">
+                        <h6 class="text-center alert-link mt-1 mb-1" style="font-size: 14px;">
+                            No Web Applications as Yet. Sign Up, Create one and Get paid.
+                        </h6>
+                        </div>
+
                     {%endfor%}
                 </div>
             </div>
             
         </div>
     </div>
-
-
-    <div class="container-fluid">
-        <hr class="my-2">
-        <div class="row featurette">
-
-            <div class="col-md-4 content-align-center text-center">
-                <img src="{{asset('assets/images/landingpage/600.png')}}" class=" my-5 p-2 text-center w-100 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" focusable="false" role="img" aria-label="Placeholder: 500x500">
-            </div>
-
-            <div class="col-md-8 content-align-center text-center">
-                <h2 class="text-center font-weight-bold my-5 p-2">
-                    LATEST WEB APPLICATIONS
-                </h2>
-                {%for project in project | slice(0,6)%}
-
-                    <figure class="figure shadow-sm mx-1 p-3 col-sm-4 w-25">
-                        <div class="text-center">
-                            <img src="{{asset('uploads/project/icons/'~ project.icon) }}" class="mx-auto figure-img img-fluid rounded" alt="..." style="height:70px; width: 70px;">
-                        </div>
-
-                        <h6 class="text-center text-primary mt-1 mb-1" style="font-size: 14px;">
-                            <a href="{{path('marketplace_show_project', {id: project.id})}}">
-                                {{project.title | capitalize}}</a>
-                            <i class="text-success fa fa-check-circle"></i>
-                        </h6>
-
-                        <figcaption class="figure-caption mt-1">
-                            {{project.description | slice(0,40)~'...'}}
-                        </figcaption>
-
-
-                    </figure>
-                    {%endfor%}
-                </div>
-            </div>
-
-        </div>
         <footer class="my-5 pt-5 text-muted text-center text-small" style="font-size: 12px">
             <p class="mb-1">Copyright 2017-2019 Hybrid Market Place</p>
             <ul class="list-inline">
